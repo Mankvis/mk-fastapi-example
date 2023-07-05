@@ -1,0 +1,19 @@
+# 默认
+default:
+  env: default
+  debug: true
+
+# 开发环境
+development:
+  env: development
+  debug: true
+
+# 测试环境
+test:
+  env: test
+  debug: true
+
+# 生产环境
+production:
+  env: production
+  debug: false
