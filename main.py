@@ -8,21 +8,13 @@ import os
 
 from fastapi import FastAPI
 
-from app.core.config.settings import settings
+from app.controller.user import UserController
 
 app = FastAPI()
 
-
-@app.get('/hello')
-def hello():
-    return {
-        'env': settings.env,
-        'debug': settings.debug,
-    }
-
+app.include_router(UserController.get_router(), prefix='/api')
 
 if __name__ == '__main__':
-
     # 设置 ENV_FOR_DYNACONF 为 development
     os.environ['ENV_FOR_DYNACONF'] = 'development'
     # os.environ['ENV_FOR_DYNACONF'] = 'production'

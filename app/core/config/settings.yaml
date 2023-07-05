@@ -7,13 +7,16 @@ default:
 development:
   env: development
   debug: true
+  mysql.url: mysql+aiomysql://root:root@localhost/mk_fastapi_example
 
 # 测试环境
 test:
   env: test
   debug: true
+  mysql.url: mysql+aiomysql://root:root@localhost/mk_fastapi_example
 
 # 生产环境
 production:
   env: production
   debug: false
+  mysql.url: mysql+aiomysql://root:root@localhost/mk_fastapi_example
