@@ -18,9 +18,6 @@ class APIResponse(BaseModel):
     msg: str
     data: Optional[Any]
 
-    async def __call__(self, *args, **kwargs):
-        return JSONResponse(status_code=self.code, content=self.dict())
-
 
 class APICode(Enum):
     """ API 响应状态码  """
