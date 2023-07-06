@@ -5,28 +5,39 @@
 # @File    : user.py
 # @Software: PyCharm
 
+from typing import Optional
 from pydantic import BaseModel
 
 
-class UserBase(BaseModel):
-    """ 用户基础模型 """
+class UserCreate(BaseModel):
+    """ 创建用户模型 """
     username: str
+    hashed_password: str
+
+
+class UserUpdate(BaseModel):
+    """ 更新用户模型 """
+    username: Optional[str]
+    hashed_password: Optional[str]
+    is_active: Optional[bool]
+
+
+class UserInDB(BaseModel):
+    """ 数据库用户模型 """
+    id: int
+    username: str
+    hashed_password: str
     is_active: bool
 
-
-class UserCreate(UserBase):
-    """ 创建用户模型 """
-    hashed_password: str
+    class Config:
+        orm_mode = True
 
 
-class UserUpdate(UserBase):
-    """ 更新用户模型 """
-    hashed_password: str
-
-
-class User(UserBase):
-    """ 用户模型 """
+class UserOut(BaseModel):
+    """ 输出用户模型 """
     id: int
+    username: str
+    is_active: bool
 
     class Config:
         orm_mode = True
