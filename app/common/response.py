@@ -12,11 +12,19 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 
-class APIResponse(BaseModel):
+class APIResponseModel(BaseModel):
     """ API 响应模型 """
     code: int
     msg: str
     data: Optional[Any]
+
+
+class APIResponse(JSONResponse):
+    """
+    API 响应，继承自JSONResponse，请求状态码全部为200，通过code区分业务
+    """
+    def __init__(self, code: int, msg: str, data: Optional[Any] = None):
+        super().__init__(status_code=200, content=APIResponseModel(code=code, msg=msg, data=data).dict(exclude_none=True))
 
 
 class APICode(Enum):

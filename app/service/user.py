@@ -29,6 +29,8 @@ class UserService:
 
     async def query_user(self, user_id: int) -> UserOut:
         db_user = await self.user_repository.query_user(user_id)
+        if db_user is None:
+            raise APIException(APICode.USER_NOT_FOUND.code, APICode.USER_NOT_FOUND.msg)
         return parse_obj_as(UserOut, db_user)
 
     async def query_user_by_username(self, username: str) -> UserOut:
